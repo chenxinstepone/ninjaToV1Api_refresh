@@ -319,7 +319,7 @@ scheduler.start()
 # PANDORA_UPLOAD_URL = 'files.pandoranext.com'
 
 
-VERSION = '0.7.6'
+VERSION = '0.7.7'
 # VERSION = 'test'
 UPDATE_INFO = '支持proxy参数'
 
@@ -927,6 +927,8 @@ def send_text_prompt_and_get_response(messages, api_key, stream, model):
             if CUSTOM_ARKOSE:
                 token = get_token()
                 payload["arkose_token"] = token
+                # 在headers中添加新字段
+                headers["Openai-Sentinel-Arkose-Token"] = token
         logger.debug(f"payload: {payload}")
         response = requests.post(url, headers=headers, json=payload, stream=True)
         # print(response)
